@@ -1,17 +1,22 @@
-[<img width="200" alt="get in touch with Consensys Diligence" src="https://user-images.githubusercontent.com/2865694/56826101-91dcf380-685b-11e9-937c-af49c2510aa0.png">](https://diligence.consensys.net)<br/>
-<sup>
-[[  🌐  ](https://diligence.consensys.net)  [  📩  ](https://github.com/ConsenSys/vscode-solidity-doppelganger/blob/master/mailto:diligence@consensys.net)  [  🔥  ](https://consensys.github.io/diligence/)]
-</sup><br/><br/>
+[<img src="demo.png" alt="Logo" width="80" height="80">]
 
+A fork from https://consensys.github.io/diligence/
 
-## Solidity Shell
+## Solidity Shell Notebook
 
 An interactive Solidity shell with lightweight session recording and remote compiler support.
 
-[💾](https://www.npmjs.com/package/solidity-shell) `npm install -g solidity-shell` 
-
-<sub><b>note:</b> requires `npm install -g ganache-cli` unless it is already installed :)
+<sub><b>note:</b> use `npx hardhat node` to start a local node before runinng
 </sub>
+
+
+1) start hardhat node
+2) run shell `node bin/main.js`
+3) run the notebook ` cd notebook && npm run dev`
+
+
+
+```javascript
 
 ```javascript
 ⇒  solidity-shell
