@@ -1,4 +1,4 @@
-[<img src="demo.png" alt="Logo" width="80" height="80">]
+<img src="demo.png" alt="Preview" width="800">
 
 A fork from https://consensys.github.io/diligence/
 
