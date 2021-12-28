@@ -119,9 +119,9 @@ class InteractiveSolidityShell {
             templateFuncMain: 'main',
             installedSolidityVersion: null, // overridden after merging settings; never use configured value
             providerUrl: 'http://localhost:8545',
-            autostartGanache: true,
-            ganacheCmd: 'ganache-cli',
-            ganacheArgs: [],
+            autostartGanache: false,
+            ganacheCmd: 'hardhat',
+            ganacheArgs: ['node'],
             debugShowContract: false
         }
 
@@ -409,7 +409,7 @@ class Blockchain {
         if (this.proc) {
             return this.proc;
         }
-        this.proc = require('child_process').spawn(this.settings.ganacheCmd, this.settings.ganacheArgs);
+        // this.proc = require('child_process').spawn(this.settings.ganacheCmd, this.settings.ganacheArgs);
     }
 
     stopService() {

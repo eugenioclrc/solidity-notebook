@@ -230,3 +230,79 @@ vorpal
 vorpal.execSync("repl")
 
 //vorpal.execSync("uint a = 2") /* debug */
+
+
+const app = require('express')();
+const http = require('http').Server(app);
+const io = require('socket.io')(http, {
+      cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
+
+
+
+app.get('/', function(req, res) {
+   // res.sendfile('index.html');
+   res.send(`
+   <!DOCTYPE html>
+<html>
+   <head>
+      <title>Hello world</title>
+   </head>
+   <script src = "/socket.io/socket.io.js"></script>
+   
+   <script>
+      const socket = io();
+      window.s = socket;
+   </script>
+   <body>Hello</body>
+</html>`);
+});
+
+let lines = 0;
+
+//Whenever someone connects this gets executed
+io.on('connection', function(socket) {
+    console.log('A user connected');
+
+    socket.on('exec', async function ({ id, value }) {
+        try {
+            lines++;
+            let command = multilineInput(value);
+            const statement = new SolidityStatement(command);
+            const response = await shell.run(statement);
+            socket.emit('response', { response, id, line: lines });
+        } catch(err) {
+            socket.emit('error', { error: err, id, line: lines });
+        }
+    });
+   //Whenever someone disconnects this piece of code executed
+   socket.on('disconnect', function () {
+      console.log('A user disconnected');
+   });
+});
+
+http.listen(3005, function() {
+   console.log('listening on *:3005');
+});
+
+/*
+
+        let command = multilineInput(input);
+
+        const statement = new SolidityStatement(command);
+
+        /* REPL cmd * /
+        shell.run(statement).then(res => {
+            if(!Array.isArray(res) && typeof res === 'object'){
+                return cb();
+            }
+            LAST_KNOWN_RESULT = res;
+            cb(c.bold(c.yellow(res)));
+        }).catch(errors => {
+            console.error(errors)
+            cb()
+        })
+*/
